@@ -1,0 +1,113 @@
+server:
+  port: 8081
+
+
+  #   application:
+  #      name: USER-SERVICE
+spring:
+  application:
+    name: USER-SERVICE
+  datasource:
+    url: jdbc:mysql://localhost:3306/microservices
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+  config:
+    import: configserver:http://localhost:8085
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-85973416.okta.com/oauth2/default
+      client:
+        registration:
+          my-internal-client:
+            provider: okta
+            authorization-grant-type: client_credentials
+            scope: internal
+            client-id: 0oa9t5itis10MngiQ5d7
+            client-secret: lr0d3u3WM0vEn6XoAhQlD9Y52pxn7MrxY1h1PHcq
+        provider:
+          okta:
+            issuer-uri: https://dev-85973416.okta.com/oauth2/default
+
+
+
+
+
+
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      ratingHotelBreaker:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransactionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 6s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+  retry:
+    instances:
+      ratingHotelService:
+        max-attempts: 3
+        wait-duration: 5s
+#  ratelimiter:
+#    instances:
+#      userRateLimiter:
+#        limit-refresh-period: 1s
+#        limit-for-period: 2
+#        timeout-duration: 0s
+
+#resilience4j.ratelimiter:
+#  configs:
+#    default:
+#      registerHealthIndicator: false
+#      limitForPeriod: 2
+#      limitRefreshPeriod: 1s
+#      timeoutDuration: 0
+#      eventConsumerBufferSize: 100
+
+
+#  profiles:
+#    active: prod
+
+#   eureka:
+#      instance:
+#         prefer-ip-address: true
+#      client:
+#         register-with-eureka: true
+#         fetch-registry: true
+#         service-url:
+#            defaultZone: http://localhost:8761/eureka
+
+
+okta:
+  oauth2:
+    issuer: https://dev-85973416.okta.com/oauth2/default
+    audience: api://default
+#    client-id: 0oa9t5itis10MngiQ5d7
+#    client-secret: lr0d3u3WM0vEn6XoAhQlD9Y52pxn7MrxY1h1PHcq
+#    scopes: openid, profile, email, offline_access

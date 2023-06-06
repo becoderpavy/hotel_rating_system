@@ -1,0 +1,29 @@
+package com.becoder.service;
+
+import java.util.List;
+
+import com.becoder.entites.Hotel;
+import com.becoder.exception.ResourceNotFoundException;
+import com.becoder.repository.HotelRepository;
+
+public class HotelServiceImpl implements HotelService {
+
+	private HotelRepository hotelRepo;
+
+	@Override
+	public Hotel saveHome(Hotel hotel) {
+		return hotelRepo.save(hotel);
+	}
+
+	@Override
+	public Hotel getHome(String id) {
+		return hotelRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Hotel id not found with id" + id));
+	}
+
+	@Override
+	public List<Hotel> getAllHome() {
+		return hotelRepo.findAll();
+	}
+
+}

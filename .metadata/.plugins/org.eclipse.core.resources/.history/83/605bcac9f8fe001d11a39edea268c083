@@ -1,0 +1,33 @@
+
+package com.becoder.service;
+
+/*
+* import java.util.List;
+* 
+* import org.springframework.beans.factory.annotation.Autowired; import
+* org.springframework.stereotype.Service;
+* 
+* import com.becoder.entites.Ratings; import
+* com.becoder.repository.RatingRepository;
+* 
+* @Service public class RatingServiceImpl implements RatingsService {
+* 
+* @Autowired private RatingRepository ratingRepo;
+* 
+* @Override public Ratings saveRatings(Ratings rating) { return
+* ratingRepo.save(rating); }
+* 
+* @Override public List<Ratings> getAllRatings() { return ratingRepo.findAll();
+* }
+* 
+* @Override public List<Ratings> getRatingByHotelId(String hotelId) { return
+* ratingRepo.findByHotelId(hotelId); }
+* 
+* @Override public List<Ratings> getRatingByUserlId(String userlId) { return
+* ratingRepo.findByUserId(userlId); }
+* 
+* }
+*/
+public class RatingServiceImpl {
+
+}

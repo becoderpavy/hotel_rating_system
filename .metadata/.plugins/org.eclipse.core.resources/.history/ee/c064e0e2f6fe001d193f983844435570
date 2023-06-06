@@ -1,0 +1,21 @@
+package com.becoder.entites;
+
+import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Data
+@Entity
+public class Ratings {
+
+	private String ratingId;
+
+	private String userId;
+
+	private String hotelId;
+
+	private int rating;
+
+	private String feedback;
+
+}

@@ -1,0 +1,9 @@
+package com.becoder.repository;
+
+import java.util.List;
+
+import com.becoder.entites.Ratings;
+
+public interface RatingRepository {
+
+}

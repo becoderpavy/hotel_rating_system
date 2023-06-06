@@ -1,0 +1,15 @@
+package com.becoder.service;
+
+import java.util.List;
+
+import com.becoder.entites.Hotel;
+
+public interface HotelService {
+
+	Hotel saveHome(Hotel home);
+
+	Hotel getHome(String id);
+
+	List<Hotel> getAllHome();
+
+}
